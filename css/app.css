@@ -1,3 +1,14 @@
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
 body {
     margin: 0px;
     font: normal 1.25em/1.9em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
@@ -30,6 +41,21 @@ p {
     position:fixed;
 }
 
+#nextItem {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    background: #FFE76E;
+    color: #fff;
+    font-size: 36px;
+    z-index: 20000;
+}
+
 ul, li {
     margin: 0px;
     padding: 0px;
@@ -59,6 +85,7 @@ li {
     position: absolute;
     float: right;
     right: 15px;
+    margin-top: 18px;
     font-size: 12px;
     color: #000000;
     color: rgba(0,0,0,0.35) ;
@@ -74,8 +101,8 @@ li {
 }
 
 .doneItem {
-    background: #42F59B;
-    color: #fff;
+    /*background: #42F59B;*/
+    color: #42F59B;
     text-decoration: line-through;
 }
 
@@ -86,7 +113,7 @@ li {
 
 .lateItem {
     background: #FF454B;
-    color: #fff;
+    color: #fff !important;
 }
 
 .currentItem {
@@ -108,10 +135,8 @@ li {
     position:absolute;
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
-    top:70px;
-    bottom:0;
-    left:10px;
-    right:10px;
-    /*width:100%;
-    height:100%;*/
+    width:100%;
+    height:100%;
+    padding: 10px;
+    padding-bottom: 80px;
 }
