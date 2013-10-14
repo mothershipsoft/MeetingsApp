@@ -94,7 +94,8 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
                 $currentItem.children().html(me.timeStringFromElapsed(thisItem.remainingTime));
 
                 if (thisItem.remainingTime < 0 && $currentItem.length) {
-                    $currentItem[0].className = "lateItem";
+                    // $currentItem[0].className = "lateItem";
+                    console.log('Render!');
                 }
             }
 

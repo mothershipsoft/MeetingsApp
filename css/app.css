@@ -37,9 +37,9 @@ p {
     z-index: 10000;
 }
 
-.float-button {
+/*.float-button {
     position:fixed;
-}
+}*/
 
 #nextItem {
     position: fixed;
@@ -138,5 +138,6 @@ li {
     width:100%;
     height:100%;
     padding: 10px;
+    padding-top: 0px;
     padding-bottom: 80px;
 }
