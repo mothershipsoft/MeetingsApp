@@ -1,0 +1,117 @@
+body {
+    margin: 0px;
+    font: normal 1.25em/1.9em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    background: #f4f5f4;
+}
+
+p {
+
+}
+
+.sticky {
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    top: 0px;
+    z-index: 10000;
+}
+
+.currentSticky {
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    top: 120px;
+    z-index: 10000;
+}
+
+.float-button {
+    position:fixed;
+}
+
+ul, li {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+ul {
+    margin-bottom: 58px;
+    background: #fff;
+}
+
+li {
+    height: 70px;
+    display:-webkit-box;
+    -webkit-box-align:center;
+    padding: 0 15px;
+    border-bottom: 1px solid #f4f5f4;
+}
+
+.title {
+    height: 120px;
+    font-size: 36px;
+    background: #fff;
+}
+
+.listTime {
+    position: absolute;
+    float: right;
+    right: 15px;
+    font-size: 12px;
+    color: #000000;
+    color: rgba(0,0,0,0.35) ;
+}
+
+.currentItem .listTime {
+    color: #fff;
+}
+
+.currentTopic {
+    background: #42F59B;
+    border-bottom: none
+}
+
+.doneItem {
+    background: #42F59B;
+    color: #fff;
+    text-decoration: line-through;
+}
+
+.doneItem .listTime {
+    color: #fff;
+    text-decoration: line-through;
+}
+
+.lateItem {
+    background: #FF454B;
+    color: #fff;
+}
+
+.currentItem {
+    background: #1A1A1A;
+    color: #fff;
+}
+
+.main-view {
+    position: absolute;
+    width:100%;
+    height:100%;
+}
+
+.main-view.showing {
+    left:320px;
+}
+
+.main-content {
+    position:absolute;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+    top:70px;
+    bottom:0;
+    left:10px;
+    right:10px;
+    /*width:100%;
+    height:100%;*/
+}

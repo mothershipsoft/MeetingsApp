@@ -1,0 +1,20 @@
+<button id='nextTopic' class='float-button'>Next Topic</button><button id='nextItem' class='float-button' style='left:200px'>Next Item</button>
+<ul>
+   <li class='title'><%= name %></li>
+   <li>Monday 10:00 - 10:26</li>
+
+   <% _.each(attendees,function(name) { %>
+        <li><%= name %></li> <% })
+   %>
+
+</ul>
+
+<ul id='topicList'>
+ <% _.each(agenda,function(topic) { %>
+
+        <li class='<%= me.classForTopic(topic) %>' > <span class='listTime'><%= me.timeStringFromElapsed(topic.remainingTime) %></span> <span> <%= topic.topic %> </span>    </li>
+                <% _.each(topic.items,function(item) { %>
+                        <li class='<%= me.classForItem(topic,item) %>'> <span class='listTime'><%= me.timeStringFromElapsed(item.remainingTime) %> </span> <%= item.title %>    </li> 
+                <% }) %>
+ <% }) %>
+</ul>
