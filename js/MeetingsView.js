@@ -10,7 +10,7 @@
 //----
 
 
-define(["backbone","text!../templates/meeting.html"], function(Backbone, meetingTemplate) {
+define(["backbone","text!../templates/Meeting.html"], function(Backbone, meetingTemplate) {
     "use strict";
     var _meetingTemplate;
     var MeetingView = Backbone.View.extend({
