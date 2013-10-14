@@ -74,11 +74,12 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
             if (agenda) {
                 agenda[currentTopicIndex].remainingTime = timeElapsed;
 
-                $(".currentTopic").find(".listTime").html(me.timeStringFromElapsed(timeElapsed));
+                $(".currentTopic").find(".listTime").text(me.timeStringFromElapsed(timeElapsed));
 
                 var currentItemIndex = this.model.get("currentItem");
 
                 var thisItem = agenda[currentTopicIndex].items[currentItemIndex];
+
                 thisItem.remainingTime -= 100;
 
                 // find the current item in the DOM
@@ -91,11 +92,10 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
                 var $currentItem = $($("#topicList").children()[n]);
 
 
-                $currentItem.children().html(me.timeStringFromElapsed(thisItem.remainingTime));
+                $currentItem.children().text(me.timeStringFromElapsed(thisItem.remainingTime));
 
-                if (thisItem.remainingTime < 0 && $currentItem.length) {
-                    // $currentItem[0].className = "lateItem";
-                    console.log('Render!');
+                if (thisItem.remainingTime < 0 && thisItem.remainingTime > -200 && $currentItem.length) {
+                    $currentItem.addClass("lateItem");
                 }
             }
 
