@@ -130,7 +130,7 @@ define(["backbone", "text!../templates/MeetingEditView.html"], function(Backbone
                 if (itemIndex !== undefined) {
                     var items = agenda[index].items;
                     if ($activeInput.data("type") === "length") {
-                        items[itemIndex].length = $activeInput[0].value;
+                        items[itemIndex].length = parseInt($activeInput[0].value,10);
                         var totalLength = 0;
                         for (var i in items) {
                             totalLength += items[i].length;

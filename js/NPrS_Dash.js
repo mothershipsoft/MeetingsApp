@@ -51,6 +51,9 @@ define(['NPrS_Dash_Util', "Model/MeetingModel"], function(NPrSUtil, MeetingModel
         // $(".side-bar").removeClass("showing");
 
         if (this.mainView) {
+            if (this.mainView.stopMeeting) {
+                this.mainView.stopMeeting();
+            }
             // perhaps this needs to be done after JS has been got for particular module - or long time with blank screen
             // or loading page inserted?
             this.mainView.remove();
@@ -58,10 +61,6 @@ define(['NPrS_Dash_Util', "Model/MeetingModel"], function(NPrSUtil, MeetingModel
 
         this.mainViewType = mainViewType;
 
-        if (!nprs_dash.meeting) {
-            nprs_dash.meeting = new MeetingModel({id:1, startTime: new Date().getTime()});
-            nprs_dash.meeting.fetch();
-        }
 
         switch(mainViewType) {
             case "meeting": {
@@ -74,8 +73,8 @@ define(['NPrS_Dash_Util', "Model/MeetingModel"], function(NPrSUtil, MeetingModel
                     var meetingView = new MeetingsView({model:nprs_dash.meeting});
                     mainDiv.append(meetingView.el);
                     nprs_dash.mainView = meetingView;
-
-                    setTimeout(function() {meetingView.updateTimer();}, 0);
+                    nprs_dash.meeting.resetMeeting();
+                    meetingView.startMeeting();
                 });
             }
             break;
@@ -116,9 +115,16 @@ define(['NPrS_Dash_Util', "Model/MeetingModel"], function(NPrSUtil, MeetingModel
     };
 
     NPrS_Dash.prototype._gotUser = function(arg1) {
-        // got to edit view by default...
-        $("#nextItem").css({height:"0"});
-        this.setMainView("edit");
+        var me = this;
+        if (!nprs_dash.meeting) {
+            nprs_dash.meeting = new MeetingModel({id:1, startTime: new Date().getTime()});
+            nprs_dash.meeting.fetch({success:function() {
+                // got to edit view by default...
+                $("#nextItem").css({height:"0"});
+                me.setMainView("edit");
+                nprs_dash.meeting.resetMeeting();
+            }});
+        }
 
     };
 

@@ -24,22 +24,7 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
 
             // bit of a cheat - better have a higher level controller view that triggers event in this view
             $("#nextItem").click(function() {me.nextItemClicked();});
-
-            this.model.set("startTime",new Date().getTime());
-            this.model.set("currentItem", 0);
-            this.model.set("currentTopic", 0);
-            var agenda = this.model.get("agenda");
-            for (var i in agenda) {
-                if (typeof agenda[i].remainingTime == 'undefined') {
-                    agenda[i].remainingTime = agenda[i].length*1000;
-                }
-                var items = agenda[i].items;
-                for (var j in items) {
-                    if (typeof items[j].remainingTime == 'undefined') {
-                        items[j].remainingTime = items[j].length*1000;
-                    }
-                }
-            }
+            this.stopMeeting();
             this.model.bind('change', function()  { me.render(); });
             this.render();
         },
@@ -123,11 +108,41 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
                     $currentItem.css({background:"#FF454B",color:"#fff"});
                 }
             }
-
-            setTimeout(function() {me.updateTimer();}, 100);
         }
 
     });
+
+    MeetingView.prototype.startMeeting = function() {
+        var me = this;
+
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = 0;
+        }
+        this.timer = setInterval(function() {me.updateTimer();}, 100);
+    };
+
+    MeetingView.prototype.stopMeeting = function() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = 0;
+        }
+    };
+
+    MeetingView.prototype.resetMeeting = function() {
+        this.stopMeeting();
+        this.model.set("startTime",new Date().getTime());
+        this.model.set("currentItem", 0);
+        this.model.set("currentTopic", 0);
+        var agenda = this.model.get("agenda");
+        for (var i in agenda) {
+            agenda[i].remainingTime = agenda[i].length*1000;
+            var items = agenda[i].items;
+            for (var j in items) {
+                items[j].remainingTime = items[j].length*1000;
+            }
+        }
+    };
 
     MeetingView.prototype.timeStringFromElapsed = function(timeElapsed) {
         var mins = Math.floor(Math.abs((timeElapsed/1000)/60));
