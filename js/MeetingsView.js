@@ -55,6 +55,9 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
                 attendees: attendees,
                 remainingTopics:remainingTopics
             }));
+
+            this.$topicList = $("#topicList").children();
+            this.$currentTimer = $(".currentTopic").find(".listTime");
             return this;
         },
         updateTimer:function() {
@@ -74,7 +77,7 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
             if (agenda) {
                 agenda[currentTopicIndex].remainingTime = timeElapsed;
 
-                $(".currentTopic").find(".listTime").text(me.timeStringFromElapsed(timeElapsed));
+                this.$currentTimer.text(me.timeStringFromElapsed(timeElapsed));
 
                 var currentItemIndex = this.model.get("currentItem");
 
@@ -89,13 +92,16 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
                     n += agenda[i].items.length + 1;
                 }
 
-                var $currentItem = $($("#topicList").children()[n]);
+                var $currentItem = $(this.$topicList[n]);
 
 
                 $currentItem.children().text(me.timeStringFromElapsed(thisItem.remainingTime));
 
                 if (thisItem.remainingTime < 0 && thisItem.remainingTime > -200 && $currentItem.length) {
-                    $currentItem.addClass("lateItem");
+                    console.log("remaing time: " + thisItem.remainingTime);
+                    // TODO: !!add class crashes mobile safari!!
+                    // this is the workaround...far from ideal.
+                    $currentItem.css({background:"#FF454B",color:"#fff"});
                 }
             }
 

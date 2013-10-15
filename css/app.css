@@ -111,9 +111,9 @@ li {
     text-decoration: line-through;
 }
 
-.currentItem.lateItem {
-    background: #FF454B !important;
-    color: #fff !important;
+.currentItem .lateItem {
+    background: #FF454B;
+    color: #fff;
 }
 
 .currentItem {
