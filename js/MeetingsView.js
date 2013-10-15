@@ -22,7 +22,7 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
             //_.bindAll(this, "render");
             var me = this;
             this.model.bind('change', function()  { me.render(); });
-
+            $("#nextItem").click(function() {me.nextItemClicked()})
         },
         render:function() {
 
@@ -141,7 +141,7 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
         }
     };
 
-    MeetingView.prototype.nextItemClicked = function(btn) {
+    MeetingView.prototype.nextItemClicked = function() {
         var currentTopic = this.model.get("currentTopic");
         var currentItem = this.model.get("currentItem");
         var agenda = this.model.get("agenda");
