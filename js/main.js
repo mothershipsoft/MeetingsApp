@@ -55,7 +55,8 @@ requirejs.config({
     }
 });
 
-var nprs_dash = {}; // the app global
+var docLocation = document.location.pathname;
+var nprs_dash = {util:{appRoot:docLocation.substring(0, docLocation.lastIndexOf("/"))}}; // the app global
 
 var shouldUseStrict = "use strict";
 

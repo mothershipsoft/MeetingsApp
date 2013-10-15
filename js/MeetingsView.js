@@ -21,9 +21,27 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
         initialize: function(){
             //_.bindAll(this, "render");
             var me = this;
-            this.model.bind('change', function()  { me.render(); });
+
             // bit of a cheat - better have a higher level controller view that triggers event in this view
             $("#nextItem").click(function() {me.nextItemClicked();});
+
+            this.model.set("startTime",new Date().getTime());
+            this.model.set("currentItem", 0);
+            this.model.set("currentTopic", 0);
+            var agenda = this.model.get("agenda");
+            for (var i in agenda) {
+                if (typeof agenda[i].remainingTime == 'undefined') {
+                    agenda[i].remainingTime = agenda[i].length*1000;
+                }
+                var items = agenda[i].items;
+                for (var j in items) {
+                    if (typeof items[j].remainingTime == 'undefined') {
+                        items[j].remainingTime = items[j].length*1000;
+                    }
+                }
+            }
+            this.model.bind('change', function()  { me.render(); });
+            this.render();
         },
         render:function() {
 
@@ -57,8 +75,8 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
                 remainingTopics:remainingTopics
             }));
 
-            this.$topicList = $("#topicList").children();
-            this.$currentTimer = $(".currentTopic").find(".listTime");
+            this.$topicList = this.$el.find("#topicList").children();
+            this.$currentTimer = this.$el.find(".currentTopic").find(".listTime");
             return this;
         },
         updateTimer:function() {
@@ -75,7 +93,7 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
             }
 
             var timeElapsed = endTimeOfCurrentTopic - (new Date()).getTime();
-            if (agenda) {
+            if (agenda && this.$currentTimer !== undefined) {
                 agenda[currentTopicIndex].remainingTime = timeElapsed;
 
                 this.$currentTimer.text(me.timeStringFromElapsed(timeElapsed));

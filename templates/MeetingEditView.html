@@ -1,0 +1,15 @@
+<li data-new=0>Add New</li>
+<% for (var i in agenda) {%>
+    <li><input data-index=<%= i %> value=<%= agenda[i].topic %>></input>
+    <button data-index=<%= i %>>DEL</button></li>
+    <ul>
+        <% for (var j in agenda[i].items) {%>
+            <li>
+                <input data-type='title'  data-index=<%= i %> data-item=<%= j %> value=<%= agenda[i].items[j].title %>></input>
+                <input data-type='length' data-index=<%= i %> data-item=<%= j %> value=<%= agenda[i].items[j].length %>></input>
+                <button data-index=<%= i %> data-item=<%=j%>>DEL</button>
+            </li>
+        <% } %>
+        <li data-new=1 data-index=<%= i %>> Add New </li>
+    </ul>
+<% }; %>

@@ -9,10 +9,9 @@
 // Public class functions:
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
-define(["backbone"], function() {
+define(["backbone", "text!../templates/MeetingEditView.html"], function(Backbone, meetingEditViewTemplate) {
 
-    var _placeDivTemplate;
-    var _placeListTemplate;
+    var _regionEditListTemplate;
 
     var MeetingEditView = Backbone.View.extend({
         className: "meeting-edit",
@@ -129,7 +128,19 @@ define(["backbone"], function() {
 
                 var itemIndex = $activeInput.data("item");
                 if (itemIndex !== undefined) {
-                    agenda[index].items[itemIndex].title = $activeInput[0].value;
+                    var items = agenda[index].items;
+                    if ($activeInput.data("type") === "length") {
+                        items[itemIndex].length = $activeInput[0].value;
+                        var totalLength = 0;
+                        for (var i in items) {
+                            totalLength += items[i].length;
+                        }
+                        agenda[index].length = totalLength;
+                    }
+                    else {
+                        // title
+                        items[itemIndex].title = $activeInput[0].value;
+                    }
                 }
                 else {
                     agenda[index].topic = $activeInput[0].value;
@@ -172,15 +183,7 @@ define(["backbone"], function() {
          // remove: are we cleaning up?
     });
 
-    _regionEditListTemplate = _.template(
-        "<li data-new=0>Add New</li>" +
-        "<% for (var i in agenda) {%>  <li><input data-index=<%= i %> value=<%= agenda[i].topic %>></input>" +
-        "<button data-index=<%= i %>>DEL</button></li> " +
-        "<ul><% for (var j in agenda[i].items) {%>  <li><input data-index=<%= i %> data-item=<%= j %> value=<%= agenda[i].items[j].title %>></input>" +
-        "<button data-index=<%= i %> data-item=<%= j%>>DEL</button></li> " +
-        "<% } %> <li data-new=1 data-index=<%= i %>> Add New </li> </ul> <% }; %>"
-
-    );
+    _regionEditListTemplate = _.template(meetingEditViewTemplate);
 
 
 

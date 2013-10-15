@@ -6,7 +6,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
 
-define(['NPrS_Dash_Util'], function(NPrSUtil) {
+define(['NPrS_Dash_Util', "Model/MeetingModel"], function(NPrSUtil, MeetingModel) {
 
     var NPrS_Dash = function() {
         //Backbone.emulateJSON = true;
@@ -18,9 +18,11 @@ define(['NPrS_Dash_Util'], function(NPrSUtil) {
         var me = this;
 
         $("#edit-button").click(function() { if (me.mainViewType == "edit") {
+            $("#nextItem").css({height:"80px"});
             me.setMainView("meeting");
         }
         else {
+            $("#nextItem").css({height:"0"});
             me.setMainView("edit");
         }});
 
@@ -53,18 +55,22 @@ define(['NPrS_Dash_Util'], function(NPrSUtil) {
 
         this.mainViewType = mainViewType;
 
+        if (!nprs_dash.meeting) {
+            nprs_dash.meeting = new MeetingModel({id:1, startTime: new Date().getTime()});
+            nprs_dash.meeting.fetch();
+        }
+
         switch(mainViewType) {
             case "meeting": {
-                require(["MeetingsView", "Model/MeetingModel"], function(MeetingsView, MeetingModel) {
+                require(["MeetingsView"], function(MeetingsView) {
 
                     // TODO: this is in iScroll instructions...needed? Seems not...I guess it will depend on what weve put the view on
                     //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
                     var mainDiv = $(".main-content");
-                    nprs_dash.meeting = new MeetingModel({id:1, startTime: new Date().getTime()});
+
                     var meetingView = new MeetingsView({model:nprs_dash.meeting});
                     mainDiv.append(meetingView.el);
                     nprs_dash.mainView = meetingView;
-                    nprs_dash.meeting.fetch();
 
                     setTimeout(function() {meetingView.updateTimer();}, 0);
                 });
@@ -72,13 +78,11 @@ define(['NPrS_Dash_Util'], function(NPrSUtil) {
             break;
 
             case "edit": {
-                require(["MeetingEditView", "Model/MeetingModel"], function(MeetingEditView, MeetingModel) {
+                require(["MeetingEditView"], function(MeetingEditView) {
                     var mainDiv = $(".main-content");
-                    nprs_dash.meeting = new MeetingModel({id:1, startTime: new Date().getTime()});
                     var meetingView = new MeetingEditView({model:nprs_dash.meeting});
                     mainDiv.append(meetingView.el);
                     nprs_dash.mainView = meetingView;
-                    nprs_dash.meeting.fetch();
                 });
             }
             break;
