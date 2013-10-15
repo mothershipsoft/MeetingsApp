@@ -22,7 +22,8 @@ define(["backbone","text!../templates/Meeting.html"], function(Backbone, meeting
             //_.bindAll(this, "render");
             var me = this;
             this.model.bind('change', function()  { me.render(); });
-            $("#nextItem").click(function() {me.nextItemClicked()})
+            // bit of a cheat - better have a higher level controller view that triggers event in this view
+            $("#nextItem").click(function() {me.nextItemClicked();});
         },
         render:function() {
 

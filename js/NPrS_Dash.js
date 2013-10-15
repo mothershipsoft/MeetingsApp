@@ -17,13 +17,12 @@ define(['NPrS_Dash_Util'], function(NPrSUtil) {
 
         var me = this;
 
-        this.cyclesFilterType    = "warn"; // or all
-        this.milestoneFilterType = "key";  // or all
-
-        $("#sidebar-button").makeClickable(function() {
-            $(".main-view").toggleClass("showing");
-            $(".side-bar").toggleClass("showing");
-        });
+        $("#edit-button").click(function() { if (me.mainViewType == "edit") {
+            me.setMainView("meeting");
+        }
+        else {
+            me.setMainView("edit");
+        }});
 
     };
 
@@ -72,6 +71,18 @@ define(['NPrS_Dash_Util'], function(NPrSUtil) {
             }
             break;
 
+            case "edit": {
+                require(["MeetingEditView", "Model/MeetingModel"], function(MeetingEditView, MeetingModel) {
+                    var mainDiv = $(".main-content");
+                    nprs_dash.meeting = new MeetingModel({id:1, startTime: new Date().getTime()});
+                    var meetingView = new MeetingEditView({model:nprs_dash.meeting});
+                    mainDiv.append(meetingView.el);
+                    nprs_dash.mainView = meetingView;
+                    nprs_dash.meeting.fetch();
+                });
+            }
+            break;
+
             default:
             console.log(mainViewType + " not implemented yet");
             this.mainView = 0;
@@ -98,11 +109,7 @@ define(['NPrS_Dash_Util'], function(NPrSUtil) {
     };
 
     NPrS_Dash.prototype._gotUser = function(arg1) {
-        this.setMainView("meeting");
-        // setup sidebar
-        require(["NPrS_Dash_Sidebar_View"], function(SidebarView) {
-            nprs_dash.sidebarView = new SidebarView();
-        });
+        this.setMainView("edit");
 
     };
 

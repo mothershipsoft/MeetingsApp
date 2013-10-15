@@ -64,6 +64,7 @@ ul, li {
 
 ul {
     margin-bottom: 58px;
+    margin-left:50px;
     background: #fff;
 }
 
@@ -74,6 +75,7 @@ li {
     padding: 0 15px;
     border-bottom: 1px solid #f4f5f4;
 }
+
 
 .title {
     height: 120px;
@@ -141,3 +143,61 @@ li {
     padding-top: 0px;
     padding-bottom: 80px;
 }
+.meeting-edit {
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-color: #FFFFFF;
+    z-index:5000;
+}
+
+.scope-selector-column {
+    float: left;
+    width:30%;
+    height:100%;
+    margin:10px;
+    color:#AAAAAA;
+}
+
+.scope-selector-column-scroll-area {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    height:100%;
+    width: 100%;
+}
+
+.scope-selector-column ul {
+    list-style-type: none;
+}
+
+.scope-selector-column li {
+    height:40px;
+    margin-top: 20px;
+    font-size: 20px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.scope-selector-column input {
+    float:left;
+   /* width:100px;*/
+    font-weight: 100;
+    color:#AAAAAA;
+    font-size: 20px;
+    margin:0;
+    border:none;
+}
+
+.scope-selector-column input.selected {
+    font-weight: 600;
+    color:#000000;
+}
+
+.scope-selector-li-selected {
+    font-weight: 600;
+    color: #000000;
+}
+
+.scope-selector-li-selected.ticked:after {
+     content:" \2713";
+}
+
