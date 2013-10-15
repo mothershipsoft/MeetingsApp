@@ -18,10 +18,13 @@ define(['NPrS_Dash_Util', "Model/MeetingModel"], function(NPrSUtil, MeetingModel
         var me = this;
 
         $("#edit-button").click(function() { if (me.mainViewType == "edit") {
+            nprs_dash.meeting.save({},{error:function(a,b) {alert(b.responseText);}});
             $("#nextItem").css({height:"80px"});
+            $("#edit-button").text("Edit");
             me.setMainView("meeting");
         }
         else {
+            $("#edit-button").text("Done");
             $("#nextItem").css({height:"0"});
             me.setMainView("edit");
         }});
@@ -113,6 +116,8 @@ define(['NPrS_Dash_Util', "Model/MeetingModel"], function(NPrSUtil, MeetingModel
     };
 
     NPrS_Dash.prototype._gotUser = function(arg1) {
+        // got to edit view by default...
+        $("#nextItem").css({height:"0"});
         this.setMainView("edit");
 
     };

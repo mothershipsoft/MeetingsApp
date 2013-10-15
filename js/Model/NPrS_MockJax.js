@@ -19,18 +19,18 @@ define(["jquery.mockjax", "jquery"], function() {
 
     });
 
-    $.mockjax(function(settings) {
-      // settings.url == '/restful/<service>'
-      var service = settings.url.match(/\/json\/meeting\/(.*)$/);
-      if ( service ) {
-            return {
-                responseTime: 200,
-                contentType: 'text/json',
-                dataType: 'json',
-                proxy: appRoot +'/json/meeting/' + service[1] + '.json'
-            };
-        }
+    // $.mockjax(function(settings) {
+    //   // settings.url == '/restful/<service>'
+    //   var service = settings.url.match(/\/json\/meeting\/(.*)$/);
+    //   if ( service ) {
+    //         return {
+    //             responseTime: 200,
+    //             contentType: 'text/json',
+    //             dataType: 'json',
+    //             proxy: appRoot +'/json/meeting/' + service[1] + '.json'
+    //         };
+    //     }
 
-    });
+    // });
 
 });

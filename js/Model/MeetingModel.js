@@ -18,7 +18,7 @@ define(["backbone"], function(Backbone) {
     var MeetingModel = Backbone.Model.extend({
         datatype: "json",
         defaults: { id:0, attendees:[], agenda:[] },
-        urlRoot: appRoot + '/json/meeting'
+        urlRoot: appRoot + '/api/app.php/meeting'
     }
     );
     return MeetingModel;

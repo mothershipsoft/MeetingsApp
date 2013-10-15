@@ -1,0 +1,74 @@
+{
+    "id": 1,
+    "name": "Mothership Weekly",
+    "attendees":["Nick", "Tim", "Stuart"],
+    "currentTopic": 0,
+    "currentItem": 0,
+    "agenda": [
+        {
+            "topic": "Water In",
+            "length": 20,
+            "items": [
+                {
+                    "title": "History",
+                    "length": 2
+                },
+                {
+                    "title": "Sharing",
+                    "length": 10
+                },
+                {
+                    "title": "Reversion app",
+                    "length": 10
+                },
+                {
+                    "title": "Other",
+                    "length": 10
+                }
+            ]
+        },
+        {
+            "topic": "ADP",
+            "length": 60,
+            "items": [
+                {
+                    "title": "History",
+                    "length": 10
+                },
+                {
+                    "title": "History",
+                    "length": 10
+                }
+            ]
+        },
+        {
+            "topic": "Kinetic",
+            "length": 20,
+            "items": [
+                {
+                    "title": "History",
+                    "length": 10
+                },
+                {
+                    "title": "History",
+                    "length": 10
+                }
+            ]
+        },
+        {
+            "topic": "wrapup and assign actions",
+            "length": 10,
+            "items": [
+                {
+                    "title": "History",
+                    "length": 10
+                },
+                {
+                    "title": "History",
+                    "length": 10
+                }
+            ]
+        }
+    ]
+
+}
