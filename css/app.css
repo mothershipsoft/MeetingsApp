@@ -56,6 +56,28 @@ p {
     z-index: 20000;
 }
 
+/*#edit-button {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    opacity: 0.5;
+}*/
+
+#edit-button {
+    position: fixed;
+    top: 0px;
+    right: 5px;
+    padding: 10px;
+    color: blue;
+    font-size: 15px;
+}
+
 ul, li {
     margin: 0px;
     padding: 0px;
@@ -64,7 +86,7 @@ ul, li {
 
 ul {
     margin-bottom: 58px;
-    margin-left:50px;
+    margin-left:0px;
     background: #fff;
 }
 
