@@ -1,7 +1,7 @@
 <!-- <button id='nextTopic' class='float-button'>Next Topic</button><button id='nextItem' class='float-button' style='left:200px'>Next Item</button> -->
 <ul>
    <li class='title'><%= name %></li>
-   <li>Monday 10:00 - 10:26</li>
+   <li>Monday 10:00 - 10:26 <span id='edit-button'></span></li>
 
    <% _.each(attendees,function(name) { %>
         <li><%= name %></li> <% })
