@@ -1,13 +1,19 @@
 <li data-new=0>Add New</li>
 <% for (var i in agenda) {%>
-    <li><input data-index=<%= i %> value=<%= agenda[i].topic %>></input>
-    <button data-index=<%= i %>>DEL</button></li>
+    <li>
+        <input data-index=<%= i %> value=<%= agenda[i].topic %>></input>
+        <button data-type='del'  data-index=<%= i %>>DEL</button>
+        <button data-type='up'   data-index=<%= i %>>^</button>
+        <button data-type='down' data-index=<%= i %>>v</button>
+    </li>
     <ul>
         <% for (var j in agenda[i].items) {%>
             <li>
-                <input data-type='title'  data-index=<%= i %> data-item=<%= j %> value='<%= agenda[i].items[j].title %>'></input>
-                <input data-type='length' data-index=<%= i %> data-item=<%= j %> value='<%= agenda[i].items[j].length %>'></input>
-                <button data-index=<%= i %> data-item=<%=j%>>DEL</button>
+                <input  data-type='title'  data-index=<%= i %> data-item=<%= j %> value='<%= agenda[i].items[j].title %>'></input>
+                <input  data-type='length' data-index=<%= i %> data-item=<%= j %> value='<%= agenda[i].items[j].length %>'></input>
+                <button data-type='del'    data-index=<%= i %> data-item=<%=j%>>DEL</button>
+                <button data-type='up'     data-index=<%= i %> data-item=<%=j%>>^</button>
+                <button data-type='down'   data-index=<%= i %> data-item=<%=j%>>v</button>
             </li>
         <% } %>
         <li data-new=1 data-index=<%= i %>> Add New </li>

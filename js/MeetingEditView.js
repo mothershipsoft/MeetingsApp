@@ -46,7 +46,7 @@ define(["backbone", "text!../templates/MeetingEditView.html"], function(Backbone
                 });
 
                 var $btns = me.$el.children().find('button');
-                $btns.makeClickable(function(e, item) {me.deleteItem(e, item);});
+                $btns.makeClickable(function(e, item) {me.editItem(e, item);});
             },0);
 
             if (this.firstRun) {
@@ -162,15 +162,51 @@ define(["backbone", "text!../templates/MeetingEditView.html"], function(Backbone
             this.render();
          },
 
-         deleteItem: function (event, item) {
+         editItem: function (event, item) {
+            function _move (array,old_index, new_index) {
+                 while (old_index < 0) {
+                    old_index += array.length;
+                }
+                while (new_index < 0) {
+                    new_index += array.length;
+                }
+                if (new_index >= array.length) {
+                    var k = new_index - array.length;
+                    while ((k--) + 1) {
+                        array.push(undefined);
+                    }
+                }
+                array.splice(new_index, 0, array.splice(old_index, 1)[0]);
+                return array;
+            }
+            // del, up or down pressed
             var index = $(item).data("index");
             var agenda = this.model.get('agenda');
             var itemIndex = $(item).data("item");
+            var type = $(item).data("type");
             if (itemIndex !== undefined) {
-                agenda[index].items.splice(itemIndex,1);
+                // then we are action on an item
+                if (type === 'del') {
+                    agenda[index].items.splice(itemIndex,1);
+                }
+                else if (type === 'up') {
+                    _move(agenda[index].items,itemIndex,itemIndex-1);
+                }
+                else if (type === 'down') {
+                    _move(agenda[index].items,itemIndex,itemIndex+1);
+                }
             }
             else {
-                agenda.splice(index,1);
+                // then we are action on a topic
+                if (type === 'del') {
+                    agenda.splice(index,1);
+                }
+                else if (type === 'up') {
+                    _move(agenda, index,index-1);
+                }
+                else if (type === 'down') {
+                    _move(agenda, index,index+1);
+                }
             }
             this.render();
          },
@@ -185,7 +221,7 @@ define(["backbone", "text!../templates/MeetingEditView.html"], function(Backbone
 
     _regionEditListTemplate = _.template(meetingEditViewTemplate);
 
-
+    // TODO: should be in some utility...
 
     return MeetingEditView;
 });
