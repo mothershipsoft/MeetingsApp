@@ -76,6 +76,7 @@ p {
     padding: 10px;
     color: blue;
     font-size: 15px;
+    z-index: 99999;
 }
 
 ul, li {
